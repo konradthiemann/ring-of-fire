@@ -1,5 +1,8 @@
 import { Component, AfterViewInit  } from '@angular/core';
+import { Firestore, collection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { addDoc } from 'firebase/firestore';
+import { Game } from 'src/models/game';
 
 @Component({
   selector: 'app-start-screen',
@@ -8,13 +11,18 @@ import { Router } from '@angular/router';
 })
 export class StartScreenComponent implements AfterViewInit{
   buttonHover: boolean = false;
-  constructor(private router: Router) {}
+
+  constructor(private firestore: Firestore, private router: Router) {}
 
   ngAfterViewInit() {
     // this.videoLoaded();
   }
-
+  // gameID: any;
   newGame(){
-    this.router.navigateByUrl('/game');
+    let game = new Game();
+    
+    addDoc(collection(this.firestore, 'games'), game.toJSON()).then((gameInfo : any) => { 
+      this.router.navigateByUrl(`/game/`+ gameInfo.id);
+    });
   }
 }
