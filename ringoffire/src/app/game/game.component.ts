@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { Firestore, collection, collectionData, doc, updateDoc, docData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-// import { addDoc } from 'firebase/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { update } from 'firebase/database';
 
@@ -14,8 +13,6 @@ import { update } from 'firebase/database';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-  // pickCardAnimation = false;
-  // currentCard: string = '';
   game!: any;
   games$: Observable<any[]> | undefined;
   gameID!: String;
@@ -28,7 +25,6 @@ export class GameComponent implements OnInit {
 
     this.newGame();
     this.route.params.subscribe(params => {
-      // console.log(params['id']);
       this.gameID = params['id'];
 
       docData(doc(this.firestore, `games/${params['id']}`)).subscribe((games) => {
@@ -54,7 +50,7 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    if (!this.game.pickCardAnimation && this.game.stack.length > 0) {
+    if (!this.game.pickCardAnimation && this.game.stack.length > 0 && this.game.players.length > 0) {
       this.game.currentCard = this.game.stack.pop()!;
       this.game.pickCardAnimation = true;
       

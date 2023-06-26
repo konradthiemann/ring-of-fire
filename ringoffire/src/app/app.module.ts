@@ -23,16 +23,12 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
-// import { Component } from '@angular/core';
-// import { Firestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartScreenComponent,
     GameComponent,
-    // Component,
-    // Firestore,
     PlayerComponent,
     DialogAddPlayerComponent,
     GameInfoComponent,
